@@ -14,6 +14,9 @@
 
 * Run main script:
   - > _sudo python3 main.py_
+  
+* Sample Output:
+<img width="1413" alt="image" src="https://user-images.githubusercontent.com/81543946/197373289-b8bd8f86-546d-46da-9581-531374bb337e.png">
 
   
 **To run in Actual Drone:**
