@@ -73,7 +73,9 @@ if __name__ == "__main__":
             
             elif(state.get_system_state() == "land"):
                 drone.control_tab.land()
-                sys.exit(0)
+                cv2.destroyAllWindows()
+                break
+                #sys.exit(0)
                 
             print(state.get_system_state())
                       
