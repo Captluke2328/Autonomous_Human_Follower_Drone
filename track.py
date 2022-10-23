@@ -1,40 +1,52 @@
-import logging, time, threading
 import jetson.inference
 import jetson.utils
 import cv2
 import numpy as np
-import arduino as sm
+from engines import *
 
 #class Track(threading.Thread):
 class Track:
-    def __init__(self,cam):
+    def __init__(self,cam,D):
         # threading.Thread.__init__(self)
         self.daemon = True
         self.w      = cam.DISPLAY_WIDTH
-        self.h      = cam.DISPLAY_HEIGHT
-        self.ser    = sm.initConnection('/dev/ttyACM0',9600)
-
+        self.h      = cam.DISPLAY_HEIGHT  
+        self.engine = D.engines 
+        self.control = D.control_tab
+        
     def trackobject(self,info,pid,pError):
         self.info   = info
         self.pid    = pid
         self.pError = pError
         
-        if ((self.info[1]) !=0) and ((self.info[1]) < 500000):
+        if ((self.info[1]) !=0) and ((self.info[1]) < 50004):
             error = self.w//2 - self.info[0][0]
             self.posX   = int(self.pid[0]*error + self.pid[1]*(error-self.pError))
-            self.posX   = int(np.interp(self.posX, [-self.w//4, self.w//4], [-35,35]))
+            #self.posX   = int(np.interp(self.posX, [-self.w//4, self.w//4], [-35,35]))
+            self.posX   = int(np.interp(self.posX, [-self.w//4, self.w//4], [-15,15]))
+
             self.pError = error
             
             #print(str(self.posX) + " " + str(info[1]))
-            sm.sendData(self.ser, [50,self.posX],4)
             
-        # elif ((info[1]) !=0) and ((info[1]) > 5760000):
-        #     sm.sendData(self.ser,[0,0],4)
+            self.engine.executeChangesNow(0.2,0,2.5)
+            self.engine.send_movement_command_YAW(self.posX)
+            
+            # 1st Method of PID
+            #self.control.set_XDelta(self.posX)
+            #self.control.control_drone()
+         
+        elif ((info[1]) !=0) and ((info[1]) > 51104):
+            self.engine.executeChangesNow(-0.2,0,2.5)
         
         else:
-            #pass
-            sm.sendData(self.ser,[0,0],4)
-        
+            # 1st Method of PID
+            #self.control.set_XDelta(0)
+            #self.control.control_drone()
+            
+            self.engine.executeChangesNow(0,0,2.5)
+            self.engine.send_movement_command_YAW(0)
+           
     def visualise(self,img):
          # Top
         cv2.rectangle(img, (0,0), (self.w,24), (0,0,0), -1)

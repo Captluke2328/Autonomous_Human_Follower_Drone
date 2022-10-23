@@ -7,15 +7,14 @@ from csi_camera import CSI_Camera
 import numpy as np
 
 class Detect:
-    def __init__(self,cam):
+    def __init__(self,cam,D):
         self.c      = cam.initializecamera()
         self.net    = cam.net
         self.w      = cam.DISPLAY_WIDTH
         self.h      = cam.DISPLAY_HEIGHT
         self.f      = cam.font
 
-        self.track  = Track(cam)
-        # self.track.start()
+        self.track  = Track(cam,D)
         
     def read_camera(self,csi_camera,display_fps):   
         _ , camera_image=csi_camera.read()
