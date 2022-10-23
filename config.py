@@ -3,7 +3,7 @@ import socket
 from time import sleep
 from control_tab import *
 from engines import *
-# from pid import *
+from lidar import *
 
 class Drone:
     def __init__(self):
@@ -36,9 +36,10 @@ class Drone:
         while not self.vehicle.mode.name == "GUIDED":
             sleep(1)
                 
-        self.is_active = True 
-        
-        self.engines = Engines(self)
-        
+        self.is_active   = True 
+        self.lidar       = Lidar(self)
+        self.engines     = Engines(self)
         self.control_tab = controlTab(self)
+        
+
         

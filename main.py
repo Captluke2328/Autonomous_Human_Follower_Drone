@@ -10,8 +10,10 @@ from detect import *
 from camera import *
 from track import *
 from config import *
+from lidar import *
 
 os.system ('sudo systemctl restart nvargus-daemon')
+os.system ('sudo chmod 666 /dev/ttyTHS1')
 
 pError   = 0
 pid      = [0.3,0.0]
@@ -24,21 +26,23 @@ def takeoff():
 def search(info):
     start = time.time()
     drone.control_tab.stop_drone()
-    while time.time() - start < 60:
+    while time.time() - start < 120:
         if (info[1]) != 0:
             state.set_system_state("track")
     state.set_system_state("land")
     
 def track(info,drone):
-    print(info[1])
     if (info[1]) != 0:
         det.track.trackobject(info,pid,pError)
+        
     else:
         state.set_system_state("search")
-    
+
+# def lidar():
+#     det.track.distance()
+
 if __name__ == "__main__":
   
-
     while True:
         try:
             drone = Drone()
@@ -48,17 +52,18 @@ if __name__ == "__main__":
             print(str(e))
             sleep(2)
             
-    cam = Camera()
-    det = Detect(cam,drone)
-    drone.control_tab.configure_PID()
+    cam   = Camera()
+    det   = Detect(cam,drone)
     
+    drone.control_tab.configure_PID()
+
     state.set_system_state("takeoff")
 
     while drone.is_active:
         try:       
             img,info = det.captureimage()   
             det.track.visualise(img)    
-            
+                    
             if (state.get_system_state() == "takeoff"):
                 off = threading.Thread(target=takeoff)
                 off.start()
@@ -70,12 +75,15 @@ if __name__ == "__main__":
             elif(state.get_system_state() == "track"):
                 tra = threading.Thread(target=track, args=(info,drone))
                 tra.start()
-            
+
             elif(state.get_system_state() == "land"):
                 drone.control_tab.land()
                 cv2.destroyAllWindows()
                 break
                 #sys.exit(0)
+            
+            # lid = threading.Thread(target=lidar)
+            # lid.start()
                 
             print(state.get_system_state())
                       
