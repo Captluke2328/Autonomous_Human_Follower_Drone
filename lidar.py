@@ -1,7 +1,6 @@
-from turtle import distance
 import serial,time
 import numpy as np
-#
+
 class Lidar:
     def __init__(self,D):
         self.ser = serial.Serial("/dev/ttyTHS1", 115200,timeout=0) # mini UART serial device

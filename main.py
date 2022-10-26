@@ -10,7 +10,7 @@ from detect import *
 from camera import *
 from track import *
 from config import *
-from lidar import *
+from lidars import *
 
 os.system ('sudo systemctl restart nvargus-daemon')
 os.system ('sudo chmod 666 /dev/ttyTHS1')
@@ -23,10 +23,10 @@ def takeoff():
     drone.control_tab.armAndTakeoff()
     state.set_system_state("search")
     
-def search(info):
+def search(info,maxTime):
     start = time.time()
     drone.control_tab.stop_drone()
-    while time.time() - start < 120:
+    while time.time() - start < maxTime:
         if (info[1]) != 0:
             state.set_system_state("track")
     state.set_system_state("land")
@@ -37,9 +37,6 @@ def track(info,drone):
         
     else:
         state.set_system_state("search")
-
-# def lidar():
-#     det.track.distance()
 
 if __name__ == "__main__":
   
@@ -55,6 +52,9 @@ if __name__ == "__main__":
     cam   = Camera()
     det   = Detect(cam,drone)
     
+    lidar = Lidars(drone)
+    lidar.start()
+    
     drone.control_tab.configure_PID()
 
     state.set_system_state("takeoff")
@@ -69,7 +69,8 @@ if __name__ == "__main__":
                 off.start()
             
             elif(state.get_system_state() == "search"):
-                sea = threading.Thread(target=search, args=(info,))
+                maxTime = 120
+                sea = threading.Thread(target=search, args=(info,maxTime))
                 sea.start()
                 
             elif(state.get_system_state() == "track"):
@@ -81,10 +82,7 @@ if __name__ == "__main__":
                 cv2.destroyAllWindows()
                 break
                 #sys.exit(0)
-            
-            # lid = threading.Thread(target=lidar)
-            # lid.start()
-                
+                                 
             print(state.get_system_state())
                       
             cv2.imshow("Capture",img)
