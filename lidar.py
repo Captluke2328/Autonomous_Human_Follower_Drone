@@ -2,7 +2,7 @@ import serial,time
 import numpy as np
 
 class Lidar:
-    def __init__(self,D):
+    def __init__(self):
         self.ser = serial.Serial("/dev/ttyTHS1", 115200,timeout=0) # mini UART serial device
         if self.ser.isOpen() == False:
             self.ser.open()
@@ -26,3 +26,9 @@ class Lidar:
     def read_distance(self):
         distance,strength,temperature = self.read_tfluna_data()
         return distance
+
+if __name__ == "__main__":
+    init = Lidar()
+    while True:
+        x = init.read_distance()
+        print(x)

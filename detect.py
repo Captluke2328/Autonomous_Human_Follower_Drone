@@ -50,8 +50,7 @@ class Detect:
                 cy   = location[1]
                 myobjectlistArea.append(area)
                 myobjectlistC.append([cx,cy])
-		
-                
+		                
             if len(myobjectlistArea) !=0:
                 if ID==1:
                     #print(area)
@@ -60,13 +59,15 @@ class Detect:
                     cv2.line(img, (self.w//2, int(cy)), (int(cx),int(cy)), (255,0,255),3)
                     cv2.putText(img,user,(left+3,top-10),self.f,.95,(248, 254, 0),3)
                     i = myobjectlistArea.index(max(myobjectlistArea))
-                    return img,[myobjectlistC[i],myobjectlistArea[i]]
+                    return img, ID,[myobjectlistC[i],myobjectlistArea[i]]
                 
                 # else:
                 #     return img, [[0,0],0]
                       
             else:
-                return img,[[0,0],0]
+                return img, ID,[[0,0],0]
+            
+            
                 
 
             

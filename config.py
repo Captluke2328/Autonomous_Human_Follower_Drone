@@ -37,7 +37,7 @@ class Drone:
             sleep(1)
                 
         self.is_active   = True 
-        self.lidar       = Lidar(self)
+        #self.lidar       = Lidar(self)
         self.engines     = Engines(self)
         self.control_tab = controlTab(self)
         
