@@ -52,12 +52,6 @@ def track(info,drone):
 
 if __name__ == "__main__":
     
-    cam   = Camera()
-
-    path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record"
-    image_center = (cam.DISPLAY_WIDTH/2 , cam.DISPLAY_HEIGHT/2)
-    debug_image_write = cv2.VideoWriter(path + ".avi", cv2.VideoWriter_fourcc('M','J','P','G'),25,0, (cam.DISPLAY_WIDTH, cam.DISPLAY_HEIGHT))
-
     while True:
         try:
             drone = Drone()
@@ -67,6 +61,10 @@ if __name__ == "__main__":
             print(str(e))
             sleep(2)
         
+    cam = Camera()
+    path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record/"
+    writer= cv2.VideoWriter(path + 'basicvideo.mp4', cv2.VideoWriter_fourcc(*'DIVX'), 20, (cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
+
     det   = Detect(cam,drone)
     
     lidar = Lidars(drone)
@@ -102,6 +100,7 @@ if __name__ == "__main__":
             elif(state.get_system_state() == "land"):
                 drone.control_tab.land()
                 cv2.destroyAllWindows()
+                writer.release()
                 break
                 #sys.exit(0)
             
@@ -111,15 +110,18 @@ if __name__ == "__main__":
                     
             #print(state.get_system_state(),state.get_airborne())
                       
-            #cv2.imshow("Capture",img)
-            debug_image_write.write(img)
+            writer.write(img)
+            
+            cv2.imshow("Capture",img)
             
             if cv2.waitKey(1) & 0XFF == ord('q'):
-                break
+               break
+            
         except Exception as e:
             print(str(e))
             
     cv2.destroyAllWindows()
+    writer.release()
         
         
     

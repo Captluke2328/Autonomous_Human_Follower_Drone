@@ -34,7 +34,7 @@ class Lidars(threading.Thread):
                     temperature = (temperature/8.0) - 256.0 # temp scaling and offset
                     self.distance    = distance/100.0
                     
-                    print(self.distance)
+                    #print(self.distance)
                     
                 if (self.distance < 1) and (state.get_airborne() == "on"):
                     self.engine.executeChangesNow(-0.2,0,2.5)
