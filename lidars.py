@@ -54,7 +54,7 @@ class Lidars(threading.Thread):
                     temperature = (temperature/8.0) - 256.0 # temp scaling and offset
                     distance    = distance/100.0
                 
-                    if (distance < 1):
+                    if (distance < 1.5):
                         self.engine.executeChangesNow(-0.2,0,2.5)
 
     def read_lidar_distance(self):

@@ -50,8 +50,13 @@ def track(info,drone):
 # def distance():
 #     lidar.read_lidar_distance()
 
+cam = Camera()
+path = "proj"
+image_center = (cam.DISPLAY_WIDTH/2 , cam.DISPLAY_HEIGHT/2)
+debug_image_write = cv2.VideoWriter(path + ".avi", cv2.VideoWriter_fourcc('M','J','P','G'),25,0, (cam.DISPLAY_WIDTH, cam.DISPLAY_HEIGHT))
+
 if __name__ == "__main__":
-  
+    
     while True:
         try:
             drone = Drone()
@@ -106,7 +111,7 @@ if __name__ == "__main__":
                     
             #print(state.get_system_state(),state.get_airborne())
                       
-            cv2.imshow("Capture",img)
+            #cv2.imshow("Capture",img)
             
             if cv2.waitKey(1) & 0XFF == ord('q'):
                 break
