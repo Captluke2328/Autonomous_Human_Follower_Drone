@@ -26,5 +26,20 @@
 * Run main script:
   - > _sudo python3 main.py_
   
+* Configure Jetson Nano by disabling GUI and Save RAM
+  * Disable GUI to free up more RAM
+  - > sudo systemctl set-default multi-user
+    
+   * Disable ZRAM
+  - > sudo systemctl disable nvzramconfig.service
+  
+   * Default to Max-N power mode
+  - > sudo nvpmodel -m 0
+  
+ * Configure Jetson Nano to enable GUI again
+    * Re-enable GUI
+   - > sudo systemctl set-default graphical.target
+
+  
 **Run this script under your own Risk**
  
