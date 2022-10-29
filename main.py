@@ -63,7 +63,7 @@ if __name__ == "__main__":
         
     cam = Camera()
     path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record/"
-    writer= cv2.VideoWriter(path + 'basicvideo.mp4', cv2.VideoWriter_fourcc(*'DIVX'), 20, (cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
+    writer= cv2.VideoWriter(path + 'test.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 20 ,(cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
 
     det   = Detect(cam,drone)
     
