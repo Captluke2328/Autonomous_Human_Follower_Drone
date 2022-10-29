@@ -50,15 +50,14 @@ def track(info,drone):
 # def distance():
 #     lidar.read_lidar_distance()
 
-# cam = Camera()
-# path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record"
-# image_center = (cam.DISPLAY_WIDTH/2 , cam.DISPLAY_HEIGHT/2)
-# debug_image_write = cv2.VideoWriter(path + ".avi", cv2.VideoWriter_fourcc('M','J','P','G'),25,0, (cam.DISPLAY_WIDTH, cam.DISPLAY_HEIGHT))
-
 if __name__ == "__main__":
     
-    path = r"/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record/"
-    
+    cam   = Camera()
+
+    path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record"
+    image_center = (cam.DISPLAY_WIDTH/2 , cam.DISPLAY_HEIGHT/2)
+    debug_image_write = cv2.VideoWriter(path + ".avi", cv2.VideoWriter_fourcc('M','J','P','G'),25,0, (cam.DISPLAY_WIDTH, cam.DISPLAY_HEIGHT))
+
     while True:
         try:
             drone = Drone()
@@ -68,7 +67,6 @@ if __name__ == "__main__":
             print(str(e))
             sleep(2)
         
-    cam   = Camera()
     det   = Detect(cam,drone)
     
     lidar = Lidars(drone)
@@ -112,12 +110,9 @@ if __name__ == "__main__":
             #     lid.start()
                     
             #print(state.get_system_state(),state.get_airborne())
-            
-            #cam = Camera()
-            image_center = (cam.DISPLAY_WIDTH/2 , cam.DISPLAY_HEIGHT/2)
-            debug_image_write = cv2.VideoWriter(path + ".avi", cv2.VideoWriter_fourcc('M','J','P','G'),25,0, (cam.DISPLAY_WIDTH, cam.DISPLAY_HEIGHT))
-                
+                      
             #cv2.imshow("Capture",img)
+            debug_image_write.write(img)
             
             if cv2.waitKey(1) & 0XFF == ord('q'):
                 break
