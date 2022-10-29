@@ -51,7 +51,7 @@ def track(info,drone):
 #     lidar.read_lidar_distance()
 
 cam = Camera()
-path = "proj"
+path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record"
 image_center = (cam.DISPLAY_WIDTH/2 , cam.DISPLAY_HEIGHT/2)
 debug_image_write = cv2.VideoWriter(path + ".avi", cv2.VideoWriter_fourcc('M','J','P','G'),25,0, (cam.DISPLAY_WIDTH, cam.DISPLAY_HEIGHT))
 
