@@ -5,6 +5,7 @@ import threading
 import state
 
 from time import sleep,time
+from datetime import datetime
 
 from detect import *
 from camera import *
@@ -62,8 +63,10 @@ if __name__ == "__main__":
             sleep(2)
         
     cam = Camera()
+    curr_timestamp = int(datetime.timestamp(datetime.now()))
+
     path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record/"
-    writer= cv2.VideoWriter(path + 'test.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 20 ,(cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
+    writer= cv2.VideoWriter(path + "record" + str(curr_timestamp) + '.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 20 ,(cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
 
     det   = Detect(cam,drone)
     
@@ -95,8 +98,7 @@ if __name__ == "__main__":
                 state.set_time(120)
                 tra = threading.Thread(target=track, args=(info,drone))
                 tra.start()
-                          
-           
+                        
             elif(state.get_system_state() == "land"):
                 drone.control_tab.land()
                 cv2.destroyAllWindows()
@@ -112,7 +114,7 @@ if __name__ == "__main__":
                       
             writer.write(img)
             
-            cv2.imshow("Capture",img)
+            #cv2.imshow("Capture",img)
             
             if cv2.waitKey(1) & 0XFF == ord('q'):
                break

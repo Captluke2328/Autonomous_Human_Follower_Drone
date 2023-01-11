@@ -33,10 +33,10 @@ class Drone:
             print(f">> Mode Updated: {value}")
 
         ## We will not let the script to continue unless it changes to GUIDED
-        self.vehicle.mode = VehicleMode("GUIDED")
+        #self.vehicle.mode = VehicleMode("GUIDED")
         while not self.vehicle.mode.name == "GUIDED":
             sleep(1)
-                
+                        
         self.is_active   = True 
         #self.lidar       = Lidar(self)
         self.engines     = Engines(self)
