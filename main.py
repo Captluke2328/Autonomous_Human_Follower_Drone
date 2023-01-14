@@ -13,8 +13,8 @@ from track import *
 from config import *
 from lidars import *
 
-os.system ('sudo systemctl restart nvargus-daemon')
-os.system ('sudo chmod 666 /dev/ttyTHS1')
+#os.system ('sudo systemctl restart nvargus-daemon')
+#os.system ('sudo chmod 666 /dev/ttyTHS1')
 
 pError   = 0
 
