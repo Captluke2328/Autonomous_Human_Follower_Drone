@@ -11,7 +11,7 @@ class controlTab:
         self.vehicle = D.vehicle
         self.drone = D
         self.THRESHOLD_ALT = 0.3
-        self.altitude = 2.5
+        self.altitude = 1.5
         self.engine = D.engines
         
         self.inputValueYaw = 0

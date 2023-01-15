@@ -35,7 +35,7 @@ class Track:
             
             #print(str(self.posX) + " " + str(info[1]))
             
-            self.engine.executeChangesNow(0.2,0,2.5)
+            self.engine.executeChangesNow(0.2,0,1.5)
             self.engine.send_movement_command_YAW(self.posX)
             
             # 1st Method of PID
