@@ -17,6 +17,7 @@ from lidars import *
 #os.system ('sudo chmod 666 /dev/ttyTHS1')
 
 pError   = 0
+altitude = 1.5
 
 # 1st Option 
 #pid      = [0.1,0.1]
@@ -27,7 +28,7 @@ pid     = [0.3,0.1]
 #pid     = [0.5,0.4]
 
 def takeoff():
-    drone.control_tab.armAndTakeoff()
+    drone.control_tab.armAndTakeoff(altitude)
     state.set_system_state("search")
     
 def search(id):
@@ -42,7 +43,7 @@ def track(info,drone):
     #print(info[1])
     if (info[1]) != 0:
         state.set_airborne("on")
-        det.track.trackobject(info,pid,pError)
+        det.track.trackobject(info,pid,pError,altitude)
         
     else:
         state.set_system_state("search")

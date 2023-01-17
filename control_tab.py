@@ -11,7 +11,6 @@ class controlTab:
         self.vehicle = D.vehicle
         self.drone = D
         self.THRESHOLD_ALT = 0.3
-        self.altitude = 1.5
         self.engine = D.engines
         
         self.inputValueYaw = 0
@@ -41,7 +40,7 @@ class controlTab:
         #self.pidRoll.output_limits = (-self.MAX_SPEED, self.MAX_SPEED)          # PID Range
         print("Configuring PID")
   
-    def armAndTakeoff(self):
+    def armAndTakeoff(self,altitude):
         print("Setting ground speed to 3")
         self.vehicle.groundspeed = 3
         
@@ -61,11 +60,11 @@ class controlTab:
             time.sleep(1)
         
         print("Taking off")
-        self.vehicle.simple_takeoff(self.altitude)
+        self.vehicle.simple_takeoff(altitude)
         
         while True:
             #print (" Altitude: ", self.vehicle.location.global_relative_frame.alt)
-            if self.vehicle.location.global_relative_frame.alt>=self.altitude*0.95:
+            if self.vehicle.location.global_relative_frame.alt>=altitude*0.95:
                 #print ("Reached target altitude")
                 break
             time.sleep(1)

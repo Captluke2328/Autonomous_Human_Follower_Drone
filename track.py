@@ -15,7 +15,7 @@ class Track:
         self.control = D.control_tab
         #self.lidar   = D.lidar
      
-    def trackobject(self,info,pid,pError):
+    def trackobject(self,info,pid,pError,altitude):
         self.info   = info
         self.pid    = pid
         self.pError = pError
@@ -35,7 +35,7 @@ class Track:
             
             #print(str(self.posX) + " " + str(info[1]))
             
-            self.engine.executeChangesNow(0.2,0,1.5)
+            self.engine.executeChangesNow(0.2,0,altitude)
             self.engine.send_movement_command_YAW(self.posX)
             
             # 1st Method of PID
@@ -46,7 +46,7 @@ class Track:
        #     self.engine.executeChangesNow(-0.2,0,2.5)
                        
         else:
-            self.engine.executeChangesNow(0,0,2.5)
+            self.engine.executeChangesNow(0,0,altitude)
             self.engine.send_movement_command_YAW(0)
             
             # 1st Method of PID
