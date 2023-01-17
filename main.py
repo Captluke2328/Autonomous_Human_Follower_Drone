@@ -66,7 +66,7 @@ if __name__ == "__main__":
     curr_timestamp = int(datetime.timestamp(datetime.now()))
 
     path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record/"
-    writer= cv2.VideoWriter(path + "record" + str(curr_timestamp) + '.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 20 ,(cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
+    writer= cv2.VideoWriter(path + "record" + str(curr_timestamp) + '.mp4', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 30 ,(cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
 
     det   = Detect(cam,drone)
     
@@ -113,7 +113,6 @@ if __name__ == "__main__":
             #print(state.get_system_state(),state.get_airborne())
                       
             writer.write(img)
-            
             #cv2.imshow("Capture",img)
             
             if cv2.waitKey(1) & 0XFF == ord('q'):

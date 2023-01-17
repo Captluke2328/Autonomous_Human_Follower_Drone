@@ -11,7 +11,7 @@ class Camera:
         self.font = cv2.FONT_HERSHEY_SIMPLEX
         
         self.DISPLAY_WIDTH=640
-        self.DISPLAY_HEIGHT=320
+        self.DISPLAY_HEIGHT=320 # 480
         self.SENSOR_MODE_720=3
             
     def initializecamera(self):
