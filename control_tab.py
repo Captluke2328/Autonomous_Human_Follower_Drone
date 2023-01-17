@@ -3,8 +3,8 @@ from pymavlink import mavutil
 from time import sleep
 from engines import *
 import numpy as np
+import state
 from simple_pid import PID
-
 
 class controlTab:
     def __init__(self,D):
@@ -73,7 +73,8 @@ class controlTab:
         print("Landing")
         self.vehicle.channels.overrides = {}
         self.vehicle.mode = VehicleMode("LAND")
-        
+        state.set_system_state("end")
+
     def goHome(self):
         print('Going Home')
         self.vehicle.mode = VehicleMode("RTL")

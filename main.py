@@ -3,6 +3,7 @@ import sys
 import os
 import threading
 import state
+import subprocess
 
 from time import sleep,time
 from datetime import datetime
@@ -14,8 +15,8 @@ from track import *
 from config import *
 from lidars import *
 
-#os.system ('sudo systemctl restart nvargus-daemon')
-#os.system ('sudo chmod 666 /dev/ttyTHS1')
+os.system ('sudo systemctl restart nvargus-daemon')
+os.system ('sudo chmod 666 /dev/ttyTHS1')
 
 pError   = 0
 altitude = 1.5
@@ -106,10 +107,18 @@ if __name__ == "__main__":
                 cv2.destroyAllWindows()
                 writer.release()
                 #exit()
-                quit()
+                #quit()
                 #break
                 #sys.exit("Program End !")
-            
+           
+            elif(state.get_system_state() == "end"):
+                process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate')
+                print("Program End !")
+                #sys.exit("Program End !")
+                #quit()
+                #exit()
+                #break
+
             # elif(state.get_airborne()):
             #     lid = threading.Thread(target=distance)
             #     lid.start()
@@ -127,6 +136,7 @@ if __name__ == "__main__":
             
     cv2.destroyAllWindows()
     writer.release()
+    sys.exit("Program End !!")
         
         
     
