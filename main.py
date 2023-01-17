@@ -6,6 +6,7 @@ import state
 
 from time import sleep,time
 from datetime import datetime
+from sys import exit
 
 from detect import *
 from camera import *
@@ -104,8 +105,10 @@ if __name__ == "__main__":
                 drone.control_tab.land()
                 cv2.destroyAllWindows()
                 writer.release()
-                break
-                #sys.exit(0)
+                #exit()
+                quit()
+                #break
+                #sys.exit("Program End !")
             
             # elif(state.get_airborne()):
             #     lid = threading.Thread(target=distance)
