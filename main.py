@@ -131,13 +131,13 @@ if __name__ == "__main__":
         except Exception as e:
             print(str(e))
             
-    cv2.destroyAllWindows()
     writer.release()
+    cv2.destroyAllWindows()
 
     # Method 1 to terminate process
     #process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/csh/end') 
 
     # Method 2 to terminate process
-    os.system("echo 2328 | sudo -S pkill -9 -f main.py")
+    #os.system("echo 2328 | sudo -S pkill -9 -f main.py")
        
     
