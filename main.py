@@ -13,7 +13,7 @@ from detect import *
 from camera import *
 from track import *
 from config import *
-from lidars import *
+from lidar import *
 
 os.system ('sudo systemctl restart nvargus-daemon')
 os.system ('sudo chmod 666 /dev/ttyTHS1')
@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     det   = Detect(cam,drone)
     
-    lidar = Lidars(drone)
+    lidar = Lidar(drone,altitude)
     lidar.start()
 
     drone.control_tab.configure_PID()
@@ -106,11 +106,7 @@ if __name__ == "__main__":
                 drone.control_tab.land()
                 cv2.destroyAllWindows()
                 writer.release()
-                #exit()
-                #quit()
-                #break
-                #sys.exit("Program End !")
-           
+       
             elif(state.get_system_state() == "end"):
                 process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate')
                 print("Program End !")
@@ -136,7 +132,5 @@ if __name__ == "__main__":
             
     cv2.destroyAllWindows()
     writer.release()
-    sys.exit("Program End !!")
-        
-        
+    process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate')        
     

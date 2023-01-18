@@ -3,7 +3,7 @@ import socket
 from time import sleep
 from control_tab import *
 from engines import *
-from lidar import *
+#from read_lidar import *
 
 class Drone:
     def __init__(self):
@@ -38,7 +38,7 @@ class Drone:
             sleep(1)
                         
         self.is_active   = True 
-        #self.lidar       = Lidar(self)
+        #self.lidar      = Read_Lidar(self)
         self.engines     = Engines(self)
         self.control_tab = controlTab(self)
         
