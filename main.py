@@ -15,8 +15,8 @@ from track import *
 from config import *
 from lidar import *
 
-os.system ('sudo systemctl restart nvargus-daemon')
-os.system ('sudo chmod 666 /dev/ttyTHS1')
+os.system ('echo 2328 | sudo systemctl restart nvargus-daemon')
+os.system ('echo 2328 | sudo chmod 666 /dev/ttyTHS1')
 
 pError   = 0
 altitude = 1.5
@@ -108,15 +108,16 @@ if __name__ == "__main__":
                 writer.release()
        
             elif(state.get_system_state() == "end"):
-                process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate')
                 print("Program End !")
-                #sys.exit("Program End !")
-                #quit()
-                #exit()
-                #break
 
+                # Method 1 to terminate process
+                #process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate')
+
+                # Method 2 to terminate process
+                os.system("echo 2328 | sudo -S pkill -9 -f main.py")
+                
             # elif(state.get_airborne()):
-            #     lid = threading.Thread(target=distance)
+            #     lid = threading.Thread(target=distance)distance
             #     lid.start()
                     
             #print(state.get_system_state(),state.get_airborne())
@@ -132,5 +133,11 @@ if __name__ == "__main__":
             
     cv2.destroyAllWindows()
     writer.release()
-    process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate')        
+
+    # Method 1 to terminate process
+    #process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/terminate') 
+
+    # Method 2 to terminate process
+    os.system("echo 2328 | sudo -S pkill -9 -f main.py")
+       
     
