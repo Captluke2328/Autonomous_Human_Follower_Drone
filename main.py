@@ -35,7 +35,7 @@ def takeoff():
     
 def search(id):
     start = time.time()
-    drone.control_tab.stop_drone()
+    drone.control_tab.stop_drone(altitude)
     while time.time() - start < state.get_time():
         if (id == 1):
             state.set_system_state("track")

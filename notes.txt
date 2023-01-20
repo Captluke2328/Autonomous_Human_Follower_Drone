@@ -1,0 +1,27 @@
+# Date : 20- January-200
+I'm not sure if drone still move if not person is detected.
+I assume drone still move forward considering self.vehicle.groundspeed = 3 in control.tab.py.
+If yes. we need to ensure the drone to remain static if no object is detected. 
+
+Therefore have to modify this code in main.py:
+def search(id):
+    start = time.time()
+    drone.control_tab.stop_drone()
+    while time.time() - start < state.get_time():
+        if (id == 1):
+            state.set_system_state("track")
+    state.set_system_state("land")
+
+in control.tab
+def stop_drone(self):
+    self.engine.send_movement_command_YAW(0)
+    self.engine.executeChangesNow(0, 0, 0)
+
+    new added **
+    self.vehicle.groundspeed = 0
+
+
+consider to use 0b0000111111100011 for altitude
+
+
+

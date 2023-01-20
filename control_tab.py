@@ -79,9 +79,9 @@ class controlTab:
         print('Going Home')
         self.vehicle.mode = VehicleMode("RTL")
         
-    def stop_drone(self):
+    def stop_drone(self,altitude):
         self.engine.send_movement_command_YAW(0)
-        self.engine.executeChangesNow(0, 0, 0)
+        self.engine.executeChangesNow(0, 0, altitude)
         
     def set_XDelta(self, xDelta):
         self.inputValueYaw = xDelta

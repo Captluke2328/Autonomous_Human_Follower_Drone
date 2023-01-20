@@ -23,7 +23,7 @@ class Engines:
         0,      
         0, 0,    
         mavutil.mavlink.MAV_FRAME_BODY_NED,  #relative to drone heading pos relative to EKF origin
-        0b0000111111000111, #ignore velocity z and other pos arguments
+        0b0000111111100011,  # original bit -> 0b0000111111000111, #ignore velocity z and other pos arguments # 0b0000111111100011
         0, 0, altitude,
         velocity_x, velocity_y, 0, 
         0, 0, 0, 
@@ -40,7 +40,7 @@ class Engines:
         0,          
         abs(heading),    
         0,      #speed deg/s
-        1 if heading >=0 else -1,
+        1 if heading > 0 else -1,
         1,          #relative offset 1
         0, 0, 0)    
 
