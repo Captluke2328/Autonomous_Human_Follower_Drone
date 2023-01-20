@@ -26,6 +26,8 @@ class Drone:
         except Exception:
             print("Some other error")
             
+        print("Waiting to change to GUIDED Mode")
+
         ## This is observer callback function to check if mode change to GUIDED
         ## @allow to monitor the changes and update
         @self.vehicle.on_attribute('mode')
