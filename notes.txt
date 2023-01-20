@@ -1,5 +1,5 @@
 # Date : 20- January-200
-I'm not sure if drone still move if not person is detected.
+1. I'm not sure if drone still move if not person is detected.
 I assume drone still move forward considering self.vehicle.groundspeed = 3 in control.tab.py.
 If yes. we need to ensure the drone to remain static if no object is detected. 
 
@@ -17,11 +17,33 @@ def stop_drone(self):
     self.engine.send_movement_command_YAW(0)
     self.engine.executeChangesNow(0, 0, 0)
 
-    new added **
+    **** To add added **
     self.vehicle.groundspeed = 0
 
+2. consider to use 0b0000111111100011 for altitude
 
-consider to use 0b0000111111100011 for altitude
+Changes i did today:
+1. Change bitmask from 0b0000111111000111 (original) to 0b0000111111100011'
+2. Add altitude parameters into def search in main.py
+def search(id):
+    start = time.time()
+    drone.control_tab.stop_drone(altitude)
+    while time.time() - start < state.get_time():
+        if (id == 1):
+            state.set_system_state("track")
+    state.set_system_state("land")
 
+and pass it into control_tab.py
+def stop_drone(self,altitude):
+        self.engine.send_movement_command_YAW(0)
+        self.engine.executeChangesNow(0, 0, altitude)
+
+Checklist:
+1. Check if recorded video is 640 x 480 
+2. Check if "waiting for guided mode" is appear
+3. Check if os.system("echo 2328 | sudo -S pkill -9 -f main.py") method able to kill the drone process
+4. Check if altitude lowering down to 1.5m
+5. Check if self.engine.send_movement_command_YAW(0) work. Because, in engine.py,
+ i've modify the send_movement_command_YAW(self,heading) >>> 1 if heading >= 0 else -1 to 1 if heading > 0 else -1 (no = sign)
 
 
