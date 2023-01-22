@@ -26,7 +26,7 @@ class Engines:
         0b0000111111000111,  # original bit -> 0b0000111111000111, #ignore velocity z and other pos arguments # 0b0000111111100011
         0, 0, 0,
         velocity_x, velocity_y, 0, 
-        0, 0, 0, 
+        0, 0, altitude, 
         0, 0)    
 
         self.vehicle.send_mavlink(msg)
