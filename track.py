@@ -20,7 +20,7 @@ class Track:
         self.pid    = pid
         self.pError = pError
         
-        if ((self.info[1]) !=0) and ((self.info[1]) < 50004):
+        if ((self.info[1]) !=0): # and ((self.info[1]) < 50004):
             error = self.w//2 - self.info[0][0]
             self.posX   = int(self.pid[0]*error + self.pid[1]*(error-self.pError))
             #self.posX  = int(np.interp(self.posX, [-self.w//4, self.w//4], [-35,35]))
