@@ -49,7 +49,7 @@ def track(info,drone):
         
     else:
         state.set_system_state("search")
-        state.set_time(60)
+        state.set_time(10)
 
 # def distance():
 #     lidar.read_lidar_distance()
@@ -94,28 +94,29 @@ if __name__ == "__main__":
                 off.start()
             
             elif(state.get_system_state() == "search"):
-                state.set_time(60)
+                state.set_time(10)
                 sea = threading.Thread(target=search, args=(id,))
                 sea.start()
                 
             elif(state.get_system_state() == "track"):
-                state.set_time(120)
+                state.set_time(10)
                 tra = threading.Thread(target=track, args=(info,drone))
                 tra.start()
                         
             elif(state.get_system_state() == "land"):
                 drone.control_tab.land()
-                cv2.destroyAllWindows()
                 writer.release()
+                cv2.destroyAllWindows()
+
        
             elif(state.get_system_state() == "end"):
                 print("Program End !")
 
                 # Method 1 to terminate process
-                process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/csh/end')
+                #process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/csh/end')
 
                 # Method 2 to terminate process
-                #os.system("echo 2328 | sudo -S pkill -9 -f main.py")
+                os.system("echo 2328 | sudo -S pkill -9 -f main.py")
                 
             # elif(state.get_airborne()):
             #     lid = threading.Thread(target=distance)distance
