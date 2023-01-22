@@ -112,10 +112,10 @@ if __name__ == "__main__":
                 print("Program End !")
 
                 # Method 1 to terminate process
-                #process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/csh/end')
+                process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/csh/end')
 
                 # Method 2 to terminate process
-                os.system("echo 2328 | sudo -S pkill -9 -f main.py")
+                #os.system("echo 2328 | sudo -S pkill -9 -f main.py")
                 
             # elif(state.get_airborne()):
             #     lid = threading.Thread(target=distance)distance
@@ -139,6 +139,6 @@ if __name__ == "__main__":
     #process = subprocess.call('/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/csh/end') 
 
     # Method 2 to terminate process
-    #os.system("echo 2328 | sudo -S pkill -9 -f main.py")
+    os.system("echo 2328 | sudo -S pkill -9 -f main.py")
        
     
