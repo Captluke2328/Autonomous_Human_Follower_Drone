@@ -26,10 +26,10 @@ class Track:
             #self.posX  = int(np.interp(self.posX, [-self.w//4, self.w//4], [-35,35]))
             
             # 2nd Option
-            self.posX  = int(np.interp(self.posX, [-self.w//4, self.w//4], [-15,15]))
+            #self.posX  = int(np.interp(self.posX, [-self.w//4, self.w//4], [-15,15]))
             
             # 1st Option
-            #self.posX   = int(np.clip(self.posX, -15,15))
+            self.posX   = int(np.clip(self.posX, -15,15))
                
             self.pError = error
             

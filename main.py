@@ -49,7 +49,7 @@ def track(info,drone):
         
     else:
         state.set_system_state("search")
-        state.set_time(10)
+        state.set_time(30)
 
 # def distance():
 #     lidar.read_lidar_distance()
@@ -94,12 +94,12 @@ if __name__ == "__main__":
                 off.start()
             
             elif(state.get_system_state() == "search"):
-                state.set_time(10)
+                state.set_time(30)
                 sea = threading.Thread(target=search, args=(id,))
                 sea.start()
                 
             elif(state.get_system_state() == "track"):
-                state.set_time(10)
+                state.set_time(30)
                 tra = threading.Thread(target=track, args=(info,drone))
                 tra.start()
                         
