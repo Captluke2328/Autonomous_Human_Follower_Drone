@@ -40,7 +40,7 @@ class Engines:
         0,          
         abs(heading),    
         0,      #speed deg/s
-        1 if heading >= 0 else -1,
+        1 if heading > 0 else -1,
         1,          #relative offset 1
         0, 0, 0)    
 
