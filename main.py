@@ -15,8 +15,8 @@ from track import *
 from config import *
 from lidar import *
 
-#os.system ('echo 2328 | sudo systemctl restart nvargus-daemon')
-#os.system ('echo 2328 | sudo chmod 666 /dev/ttyTHS1')
+os.system ('echo 2328 | sudo systemctl restart nvargus-daemon')
+os.system ('echo 2328 | sudo chmod 666 /dev/ttyTHS1')
 
 pError   = 0
 altitude = 1.5
