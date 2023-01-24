@@ -8,9 +8,9 @@ from engines import *
 class Drone:
     def __init__(self):
         try:
-            self.connection_string = '192.168.8.121:14553'
+            #self.connection_string = '192.168.8.121:14553'
             #self.connection_string = '/dev/ttyTHS1,921600'
-            #self.connection_string = '/dev/ttyACM0'
+            self.connection_string = '/dev/ttyACM0'
             self.vehicle = connect(self.connection_string, wait_ready=True)
             print("Virtual Copter is ready")
 
@@ -35,7 +35,7 @@ class Drone:
             print(f">> Mode Updated: {value}")
 
         ## We will not let the script to continue unless it changes to GUIDED
-        self.vehicle.mode = VehicleMode("GUIDED")
+        #self.vehicle.mode = VehicleMode("GUIDED")
         while not self.vehicle.mode.name == "GUIDED":
             sleep(1)
                         
