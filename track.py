@@ -25,7 +25,6 @@ class Track:
         if ((self.info[1]) !=0) and ((self.info[1]) < 28000):
             error = self.w//2 - self.info[0][0]
             self.posXC   = int(self.pid[0]*error + self.pid[1]*(error-self.pError))
-            #self.posX  = int(np.interp(self.posX, [-self.w//4, self.w//4], [-35,35]))
             
             # 2nd Option
             self.posX  = int(np.interp(self.posXC, [-abs(self.w//4), abs(self.w//4)], [-15,15]))
@@ -43,10 +42,7 @@ class Track:
             # 1st Method of PID
             #self.control.set_XDelta(self.posX)
             #self.control.control_drone()
-         
-       # elif ((info[1]) !=0) and ((info[1]) > 51104):
-       #     self.engine.executeChangesNow(-0.2,0,2.5)
-                       
+                            
         else:
             self.engine.executeChangesNow(0,0,altitude)
             self.engine.send_movement_command_YAW(0)
@@ -54,12 +50,7 @@ class Track:
             # 1st Method of PID
             #self.control.set_XDelta(0)
             #self.control.control_drone()
-           
-        #print(self.lidar.read_distance())
-        
-    #def distance(self):
-    #    self.distance = self.lidar.read_distance()
-        
+                   
     def visualise(self,img):
          # Top
         cv2.rectangle(img, (0,0), (self.w,24), (0,0,0), -1)

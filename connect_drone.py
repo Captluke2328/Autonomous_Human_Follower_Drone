@@ -21,10 +21,10 @@ from dronekit import *
 #connection_string = '192.168.195.204:14553'
 #connection_string = '192.168.195.190:14553'
 
-'''Using Uart Serial Rx->Tx and Tx-Rx connection'''
+'''Using Jetson Nano Uart Serial Rx->Tx and Tx-Rx connection'''
 #connection_string = '/dev/ttyTHS1,115200'
 
-''' Using USB Connection '''
+''' Using Jetson Nano USB Connection '''
 connection_string = '/dev/ttyACM0'
 
 vehicle = connect(connection_string, wait_ready = True)

@@ -70,7 +70,6 @@ if __name__ == "__main__":
 
     path = "/home/jlukas/Desktop/My_Project/Autonomous_Human_Follower_Drone/record/"
     writer= cv2.VideoWriter(path + "record" + str(curr_timestamp) + '.mp4', cv2.VideoWriter_fourcc('m', 'p', '4', 'v'), 30 ,(cam.DISPLAY_WIDTH,cam.DISPLAY_HEIGHT))
-    #writer= cv2.VideoWriter(path + "record" + str(curr_timestamp) + '.mp4', cv2.VideoWriter_fourcc('m', 'p', '4', 'v'), 30 ,(640,480))
 
     det   = Detect(cam,drone)
     
@@ -108,7 +107,6 @@ if __name__ == "__main__":
                 writer.release()
                 cv2.destroyAllWindows()
 
-       
             elif(state.get_system_state() == "end"):
                 print("Program End !")
 
